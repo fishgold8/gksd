@@ -12,7 +12,7 @@ import re
 
 from . import load_people
 
-SCENES = ["solo", "talk", "meeting", "speech", "military", "walk", "handshake", "press", "crowd", "other"]
+SCENES = ["solo", "talk", "meeting", "speech", "military", "ceremony", "walk", "handshake", "press", "crowd", "other"]
 SHOTS = ["close", "medium", "wide"]
 OUTFITS = ["suit", "military", "casual", "unknown"]
 CHUNK = 12

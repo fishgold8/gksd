@@ -3,10 +3,11 @@
   python find.py --person putin --scene speech --shot close --limit 5
   python find.py --person putin --with erdogan --kind video
   python find.py --person putin --outfit military --since 2025-01-01
-  python find.py --text "parade"          (ищет в описании, событии и месте)
+  python find.py --person putin --mood smiling --action "shaking hands"
+  python find.py --text "parade"          (ищет в описании, действии, событии и месте)
   python find.py --summary                (кто есть в базе и сколько)
 
-Формат строки: path | dur | people | scene | shot | outfit | date | descr
+Формат строки: path | dur | people | scene | shot | outfit | mood | date | descr
 Работает без БД: читает data/index.jsonl, так что папку можно просто
 скопировать на Google Диск.
 """
@@ -27,6 +28,8 @@ def main(argv=None):
     ap.add_argument("--scene")
     ap.add_argument("--shot")
     ap.add_argument("--outfit")
+    ap.add_argument("--mood", help="smiling laughing serious tense thoughtful neutral")
+    ap.add_argument("--action", help="подстрока: 'shaking hands', 'speaking', 'walking'...")
     ap.add_argument("--kind", choices=["video", "photo"])
     ap.add_argument("--min-dur", type=float)
     ap.add_argument("--since")
@@ -60,20 +63,24 @@ def main(argv=None):
                 continue
             if a.outfit and r["outfit"] != a.outfit:
                 continue
+            if a.mood and r.get("mood") != a.mood:
+                continue
+            if a.action and a.action.lower() not in (r.get("action") or "").lower():
+                continue
             if a.kind and (r["kind"] == "photo") != (a.kind == "photo"):
                 continue
             if a.min_dur and (r["dur"] or 0) < a.min_dur:
                 continue
             if a.since and r["date"] < a.since or a.until and r["date"] > a.until:
                 continue
-            if text and text not in f"{r['descr']} {r['event']} {r['place']}".lower():
+            if text and text not in f"{r['descr']} {r['event']} {r['place']} {r.get('action', '')} {r.get('with', '')}".lower():
                 continue
             if a.json:
                 print(json.dumps(r, ensure_ascii=False))
             else:
                 print(" | ".join(str(x) for x in [
                     r["path"], f"{r['dur']}s" if r["dur"] else "photo", ",".join(r["people"]),
-                    r["scene"], r["shot"], r["outfit"], r["date"], r["descr"]]))
+                    r["scene"], r["shot"], r["outfit"], r.get("mood", ""), r["date"], r["descr"]]))
             n += 1
             if n >= a.limit:
                 break

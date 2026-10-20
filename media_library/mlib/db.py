@@ -29,6 +29,9 @@ CREATE TABLE IF NOT EXISTS shots (
     outfit    TEXT DEFAULT '',       -- suit military casual
     place     TEXT DEFAULT '',
     descr     TEXT DEFAULT '',       -- <= 12 слов
+    mood      TEXT DEFAULT '',       -- smiling laughing serious tense thoughtful neutral
+    action    TEXT DEFAULT '',       -- shaking hands, speaking at microphone, ...
+    partner   TEXT DEFAULT '',       -- с кем взаимодействует главный человек
     date      TEXT, event TEXT, post_url TEXT,
     lib_path  TEXT,
     tagged_by TEXT DEFAULT ''        -- rules | vision
@@ -43,4 +46,8 @@ def connect(cfg):
     con = sqlite3.connect(cfg["data_dir"] / "index.db")
     con.row_factory = sqlite3.Row
     con.executescript(SCHEMA)
+    cols = {r[1] for r in con.execute("PRAGMA table_info(shots)")}
+    for c in ("mood", "action", "partner"):
+        if c not in cols:
+            con.execute(f"ALTER TABLE shots ADD COLUMN {c} TEXT DEFAULT ''")
     return con

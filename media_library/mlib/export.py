@@ -9,7 +9,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
-FIELDS = ["id", "path", "kind", "dur", "people", "scene", "shot", "outfit", "place", "date", "descr", "event", "src"]
+FIELDS = ["id", "path", "kind", "dur", "people", "scene", "shot", "outfit", "mood", "action", "with",
+          "place", "date", "descr", "event", "src"]
 
 
 def slug(s, n=40):
@@ -37,7 +38,8 @@ def row(s):
         "id": s["id"], "path": s["lib_path"], "kind": s["kind"],
         "dur": round(s["dur"], 1) if s["dur"] else None,
         "people": [p for p in s["people"].split(",") if p],
-        "scene": s["scene"], "shot": s["shot"], "outfit": s["outfit"], "place": s["place"],
+        "scene": s["scene"], "shot": s["shot"], "outfit": s["outfit"],
+        "mood": s["mood"], "action": s["action"], "with": s["partner"], "place": s["place"],
         "date": s["date"], "descr": s["descr"], "event": s["event"], "src": s["post_url"],
     }
 

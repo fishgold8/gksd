@@ -70,10 +70,12 @@ def import_labels(cfg, con, log=print):
             ppl = sorted(set(r.get("people") or []))
             con.execute(
                 "UPDATE shots SET people=?, scene=?, shot=?, outfit=?, descr=?, place=?, event=COALESCE(NULLIF(?, ''), event), "
-                "tagged_by='manual' WHERE id=?",
+                "mood=COALESCE(NULLIF(?, ''), mood), action=COALESCE(NULLIF(?, ''), action), "
+                "partner=COALESCE(NULLIF(?, ''), partner), tagged_by='manual' WHERE id=?",
                 ("," + ",".join(ppl) + "," if ppl else "", r.get("scene", ""), r.get("shot", ""),
                  r.get("outfit", ""), (r.get("descr") or "")[:100], (r.get("place") or "")[:40],
-                 (r.get("event") or "")[:80], r["id"]))
+                 (r.get("event") or "")[:80], r.get("mood") or "", (r.get("action") or "")[:40],
+                 (r.get("with") or "")[:40], r["id"]))
             n += 1
     con.commit()
     log(f"  загружено меток: {n}")
