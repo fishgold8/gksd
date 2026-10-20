@@ -1,12 +1,14 @@
 # Media library — instructions for the editing agent
 
-Do NOT read `data/index.jsonl` or list `data/library/` directly — it is thousands of lines.
-Use `find.py`; it returns one short line per file.
+Never read `data/index.jsonl`, `data/events.jsonl` or list `data/library/` directly.
+Use `find.py`: one short line per result, so a search costs a few hundred tokens.
 
-1. See who is in the library and which scenes exist:
-   `python find.py --summary`
-2. Find footage (all flags optional and combinable):
-   `python find.py --person putin --scene speech --shot close --kind video --min-dur 4 --limit 5`
+**Cheapest workflow for a voice-over line:**
+1. `python find.py --events --person putin --text summit` — which events exist (one line per event: id, date, event, place, context).
+2. `python find.py --event e8201 --action "shaking hands" --mood smiling` — clips from that event.
+
+Or search clips directly (max 3 per event by default, near-duplicates hidden):
+`python find.py --person putin --scene ceremony --action wreath --kind video --min-dur 4 --limit 5`
 
 | flag | values |
 |---|---|
@@ -14,15 +16,18 @@ Use `find.py`; it returns one short line per file.
 | `--alone` | only one person in frame |
 | `--scene` | solo, talk, meeting, speech, military, ceremony (wreaths, awards, anthem), walk, handshake, press, crowd, other |
 | `--mood` | smiling, laughing, serious, tense, thoughtful, neutral |
-| `--action "x"` | substring of the action: "shaking hands", "laying wreath", "speaking", "signing"… |
+| `--action "x"` | substring: "shaking hands", "wreath", "speaking", "signing", "listening"… |
+| `--time` | day, evening, night, indoor |
 | `--shot` | close, medium, wide |
 | `--outfit` | suit, military, casual |
 | `--kind` | video, photo |
+| `--min-dur N` | clip at least N seconds |
 | `--since/--until` | YYYY-MM-DD |
-| `--text "word"` | substring in description / event / place |
-| `--json` | full record (event, place, source link) — only when needed |
+| `--text "word"` | substring in description/action (with `--events`: in event/place/context) |
+| `--event ID` | only clips of one event (no per-event limit) |
+| `--per-event N` | max clips per event, default 3 (0 = no limit) |
+| `--json` | full record — only when needed |
 
-Output: `path | duration | people | scene | shot | outfit | mood | date | description`.
-To match a voice-over line, combine person + action/mood, e.g. `--person putin --action wreath` or `--person putin --mood smiling --action "shaking hands"`.
-`path` is relative to `data/library/`. Newest first. Every clip is already cut to one shot.
+Clip line: `path | duration | people | scene | shot | mood | action | time | description`.
+`path` is relative to `data/library/`. Newest first. Every clip is one camera shot.
 Source: Kremlin (CC BY 4.0) — credit "kremlin.ru" in the video.

@@ -9,8 +9,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
-FIELDS = ["id", "path", "kind", "dur", "people", "scene", "shot", "outfit", "mood", "action", "with",
-          "place", "date", "descr", "event", "src"]
+FIELDS = ["id", "ev", "path", "kind", "dur", "people", "scene", "shot", "outfit", "mood", "action", "with", "time",
+          "date", "descr", "descr_ru"]
 
 
 def slug(s, n=40):
@@ -33,15 +33,25 @@ def cut(src, a, b, dest, crf):
          "-movflags", "+faststart", str(dest)], check=True)
 
 
+def ev_id(s):
+    return "e" + s["media_id"].split("-")[0].lstrip("abcdefghijklmnopqrstuvwxyz")
+
+
 def row(s):
+    # событийные поля (event/place/context) лежат в events.jsonl, здесь только ссылка "ev"
     return {
-        "id": s["id"], "path": s["lib_path"], "kind": s["kind"],
+        "id": s["id"], "ev": ev_id(s), "path": s["lib_path"], "kind": s["kind"],
         "dur": round(s["dur"], 1) if s["dur"] else None,
         "people": [p for p in s["people"].split(",") if p],
         "scene": s["scene"], "shot": s["shot"], "outfit": s["outfit"],
-        "mood": s["mood"], "action": s["action"], "with": s["partner"], "place": s["place"],
-        "date": s["date"], "descr": s["descr"], "event": s["event"], "src": s["post_url"],
+        "mood": s["mood"], "action": s["action"], "with": s["partner"], "time": s["daytime"],
+        "date": s["date"], "descr": s["descr"], "descr_ru": s["descr_ru"],
     }
+
+
+def _most_common(vals):
+    vals = [v for v in vals if v]
+    return max(set(vals), key=vals.count) if vals else ""
 
 
 def process(cfg, con, log=print):
@@ -75,6 +85,18 @@ def write_index(cfg, con):
     with open(d / "index.jsonl", "w", encoding="utf-8") as f:
         for s in shots:
             f.write(json.dumps(row(s), ensure_ascii=False, separators=(",", ":")) + "\n")
+    # события: одна строка на пост — дата, событие, место, контекст, люди, сколько клипов
+    events = {}
+    for s in shots:
+        events.setdefault(ev_id(s), []).append(s)
+    with open(d / "events.jsonl", "w", encoding="utf-8") as f:
+        for ev, ss in sorted(events.items(), key=lambda kv: kv[1][0]["date"], reverse=True):
+            ppl = sorted({p for x in ss for p in x["people"].split(",") if p})
+            f.write(json.dumps({
+                "ev": ev, "date": ss[0]["date"], "event": _most_common([x["event"] for x in ss])[:80],
+                "place": _most_common([x["place"] for x in ss]), "context": _most_common([x["context"] for x in ss]),
+                "people": ppl, "clips": len(ss), "video": sum(x["kind"] != "photo" for x in ss),
+                "src": ss[0]["post_url"]}, ensure_ascii=False, separators=(",", ":")) + "\n")
     # сводка: кто есть и сколько материалов по каждой сцене — агент читает её первой
     summary = {}
     for s in shots:

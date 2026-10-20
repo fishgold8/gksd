@@ -53,7 +53,7 @@ def make(cfg, con, log=print):
             draw.rectangle([x + 3, y + 3, x + 46, y + 38], fill="black")
             draw.text((x + 8, y + 5), str(i + 1), fill="yellow", font=font)
             manifest.append({"n": i + 1, "id": r["id"], "faces": r["people"].strip(","),
-                             "caption": first_sentence(r["text"], 160)})
+                             "caption": first_sentence(r["text"], 160), "post": (r["text"] or "")[:1500]})
         sheet.save(out / f"{name}.jpg", quality=85)
         (out / f"{name}.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=0), encoding="utf-8")
     log(f"  {len(rows)} кадров -> листы {first}..{n_sheets} в {out}")
@@ -71,11 +71,14 @@ def import_labels(cfg, con, log=print):
             con.execute(
                 "UPDATE shots SET people=?, scene=?, shot=?, outfit=?, descr=?, place=?, event=COALESCE(NULLIF(?, ''), event), "
                 "mood=COALESCE(NULLIF(?, ''), mood), action=COALESCE(NULLIF(?, ''), action), "
-                "partner=COALESCE(NULLIF(?, ''), partner), tagged_by='manual' WHERE id=?",
+                "partner=COALESCE(NULLIF(?, ''), partner), context=COALESCE(NULLIF(?, ''), context), "
+                "descr_ru=COALESCE(NULLIF(?, ''), descr_ru), daytime=COALESCE(NULLIF(?, ''), daytime), "
+                "tagged_by='manual' WHERE id=?",
                 ("," + ",".join(ppl) + "," if ppl else "", r.get("scene", ""), r.get("shot", ""),
-                 r.get("outfit", ""), (r.get("descr") or "")[:100], (r.get("place") or "")[:40],
+                 r.get("outfit", ""), (r.get("descr") or "")[:150], (r.get("place") or "")[:60],
                  (r.get("event") or "")[:80], r.get("mood") or "", (r.get("action") or "")[:40],
-                 (r.get("with") or "")[:40], r["id"]))
+                 (r.get("with") or "")[:60], (r.get("context") or "")[:400], (r.get("descr_ru") or "")[:150],
+                 r.get("time") or "", r["id"]))
             n += 1
     con.commit()
     log(f"  загружено меток: {n}")
