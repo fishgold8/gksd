@@ -30,12 +30,14 @@ def make(cfg, con, log=print):
     focus = set(cfg["focus_people"])
     rows = con.execute(
         "SELECT s.id, s.keyframe, s.people, m.text FROM shots s JOIN media m ON m.id=s.media_id "
-        "WHERE m.stage!='raw' ORDER BY m.date DESC, s.id").fetchall()
+        "WHERE m.stage!='raw' AND s.tagged_by!='manual' ORDER BY m.date DESC, s.id").fetchall()
     # кандидаты: лицо узнано или человек упомянут в посте
     rows = [r for r in rows if focus & set(filter(None, r["people"].split(",")))
             or focus & set(text_people(r["text"] or "", people))]
     font = _font()
-    n_sheets = 0
+    # нумерация продолжает уже существующие листы, старые не перезаписываются
+    n_sheets = len(list(out.glob("sheet_*[0-9].jpg")))
+    first = n_sheets + 1
     for k in range(0, len(rows), PER_SHEET):
         part = rows[k:k + PER_SHEET]
         n_sheets += 1
@@ -54,7 +56,7 @@ def make(cfg, con, log=print):
                              "caption": first_sentence(r["text"], 160)})
         sheet.save(out / f"{name}.jpg", quality=85)
         (out / f"{name}.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=0), encoding="utf-8")
-    log(f"  {len(rows)} кадров -> {n_sheets} листов в {out}")
+    log(f"  {len(rows)} кадров -> листы {first}..{n_sheets} в {out}")
 
 
 def import_labels(cfg, con, log=print):
