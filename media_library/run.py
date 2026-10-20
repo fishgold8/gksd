@@ -5,11 +5,12 @@
   python run.py big            докачать большие видео через Telegram API
   python run.py shots | faces | tag | export
   python run.py tag --no-vision   подписи только по тексту, без ИИ (бесплатно)
+  python run.py sheets / import-labels   разметка листами без ключа API (см. mlib/sheets.py)
   python run.py stats
 """
 import argparse
 
-from mlib import db, export, faces, load_config, scrape_api, scrape_tg, shots, tag
+from mlib import db, export, faces, load_config, scrape_api, scrape_tg, sheets, shots, tag
 
 
 def stats(con):
@@ -24,7 +25,7 @@ def stats(con):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("step", choices=["all", "scrape", "big", "shots", "faces", "tag", "export", "stats"])
+    ap.add_argument("step", choices=["all", "scrape", "big", "shots", "faces", "tag", "sheets", "import-labels", "export", "stats"])
     ap.add_argument("--no-vision", action="store_true", help="не вызывать ИИ")
     a = ap.parse_args()
     cfg = load_config()
@@ -43,6 +44,10 @@ def main():
             faces.process(cfg, con)
         elif st == "tag":
             tag.process(cfg, con, use_vision=not a.no_vision)
+        elif st == "sheets":
+            sheets.make(cfg, con)
+        elif st == "import-labels":
+            sheets.import_labels(cfg, con)
         elif st == "export":
             export.process(cfg, con)
         elif st == "stats":
