@@ -1,0 +1,10 @@
+requests
+beautifulsoup4
+scenedetect[opencv-headless]
+pillow
+anthropic
+# распознавание лиц (необязательно, но сильно экономит ИИ-запросы)
+insightface
+onnxruntime
+# скачивание больших видео (>~20 МБ), которые веб-превью Telegram не отдаёт
+telethon

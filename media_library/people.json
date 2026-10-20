@@ -1,0 +1,17 @@
+{
+  "putin":     {"name": "Vladimir Putin",      "aliases": ["Vladimir Putin", "Putin", "President of Russia", "Russian President"]},
+  "zelensky":  {"name": "Volodymyr Zelensky",  "aliases": ["Zelensky", "Zelenskyy", "Zelenskiy"]},
+  "trump":     {"name": "Donald Trump",        "aliases": ["Donald Trump", "Trump"]},
+  "xi":        {"name": "Xi Jinping",          "aliases": ["Xi Jinping"]},
+  "erdogan":   {"name": "Recep Tayyip Erdogan","aliases": ["Erdogan", "Erdoğan"]},
+  "lukashenko":{"name": "Alexander Lukashenko","aliases": ["Lukashenko"]},
+  "modi":      {"name": "Narendra Modi",       "aliases": ["Narendra Modi", "Modi"]},
+  "lavrov":    {"name": "Sergei Lavrov",       "aliases": ["Lavrov"]},
+  "peskov":    {"name": "Dmitry Peskov",       "aliases": ["Peskov"]},
+  "belousov":  {"name": "Andrei Belousov",     "aliases": ["Belousov"]},
+  "gerasimov": {"name": "Valery Gerasimov",    "aliases": ["Gerasimov"]},
+  "mishustin": {"name": "Mikhail Mishustin",   "aliases": ["Mishustin"]},
+  "ushakov":   {"name": "Yury Ushakov",        "aliases": ["Ushakov"]},
+  "witkoff":   {"name": "Steve Witkoff",       "aliases": ["Witkoff"]},
+  "kim":       {"name": "Kim Jong Un",         "aliases": ["Kim Jong Un"]}
+}
