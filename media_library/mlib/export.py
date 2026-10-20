@@ -33,14 +33,44 @@ def cut(src, a, b, dest, crf):
          "-movflags", "+faststart", str(dest)], check=True)
 
 
-def ev_id(s):
+def post_ev(s):
     return "e" + s["media_id"].split("-")[0].lstrip("abcdefghijklmnopqrstuvwxyz")
 
 
-def row(s):
+def event_ids(shots):
+    """id события для каждого плана. Одно выступление Кремль режет на много постов,
+    поэтому посты одного дня с одинаковым названием события — одно событие (id первого поста)."""
+    by_post = {}
+    for s in shots:
+        by_post.setdefault(post_ev(s), []).append(s)
+    first, out = {}, {}
+    for ev in sorted(by_post, key=lambda e: int(e[1:] or 0)):
+        ss = by_post[ev]
+        # длинные «события» — это текст поста, а не название; по ним не склеиваем
+        name = _most_common([x["event"] for x in ss if len(x["event"] or "") <= 80]).strip().lower()
+        key = (ss[0]["date"], name or ev)
+        first.setdefault(key, ev)
+        out.update((x["id"], first[key]) for x in ss)
+    return out
+
+
+def pick_diverse(ss, n):
+    """n разных кадров: сначала разная крупность/сцена, потом разные люди/действие, потом самые длинные."""
+    ss = sorted(ss, key=lambda x: -(x["dur"] or 0))
+    picked = []
+    for key in (lambda x: (x["shot"], x["scene"]), lambda x: (x["people"], (x["action"] or "").lower()), id):
+        seen = {key(x) for x in picked}
+        for x in ss:
+            if len(picked) < n and x not in picked and key(x) not in seen:
+                seen.add(key(x))
+                picked.append(x)
+    return picked
+
+
+def row(s, ev):
     # событийные поля (event/place/context) лежат в events.jsonl, здесь только ссылка "ev"
     return {
-        "id": s["id"], "ev": ev_id(s), "path": s["lib_path"], "kind": s["kind"],
+        "id": s["id"], "ev": ev, "path": s["lib_path"], "kind": s["kind"],
         "dur": round(s["dur"], 1) if s["dur"] else None,
         "people": [p for p in s["people"].split(",") if p],
         "scene": s["scene"], "shot": s["shot"], "outfit": s["outfit"],
@@ -60,16 +90,16 @@ def process(cfg, con, log=print):
     rows = con.execute(
         "SELECT s.*, m.raw_path FROM shots s JOIN media m ON m.id=s.media_id "
         "WHERE m.stage IN ('tagged', 'exported') AND s.people!=''").fetchall()
-    # из похожих планов одного события (люди + сцена + крупность + действие) берём N самых длинных
-    keep_n = cfg.get("max_similar_per_event", 3)
+    # с одного события — не больше max_videos_per_event видео и max_photos_per_event фото, и разные
+    evs = event_ids(rows)
+    limit = {"video": cfg.get("max_videos_per_event", 2), "photo": cfg.get("max_photos_per_event", 3)}
     groups = {}
     for s in rows:
-        key = (ev_id(s), s["people"], s["scene"], s["shot"], (s["action"] or "").lower())
-        groups.setdefault(key, []).append(s)
+        kind = "photo" if s["kind"] == "photo" else "video"
+        groups.setdefault((evs[s["id"]], kind), []).append(s)
     keep = set()
-    for ss in groups.values():
-        ss.sort(key=lambda x: -(x["dur"] or 0))
-        keep.update(x["id"] for x in ss[:keep_n])
+    for (_, kind), ss in groups.items():
+        keep.update(x["id"] for x in pick_diverse(ss, limit[kind]))
     for s in rows:
         if s["id"] not in keep and s["lib_path"]:
             (lib / s["lib_path"]).unlink(missing_ok=True)
@@ -97,18 +127,19 @@ def process(cfg, con, log=print):
 def write_index(cfg, con):
     d = Path(cfg["data_dir"])
     shots = con.execute("SELECT * FROM shots WHERE lib_path IS NOT NULL ORDER BY date DESC, id").fetchall()
+    evs = event_ids(shots)
     with open(d / "index.jsonl", "w", encoding="utf-8") as f:
         for s in shots:
-            f.write(json.dumps(row(s), ensure_ascii=False, separators=(",", ":")) + "\n")
+            f.write(json.dumps(row(s, evs[s["id"]]), ensure_ascii=False, separators=(",", ":")) + "\n")
     # события: одна строка на пост — дата, событие, место, контекст, люди, сколько клипов
     events = {}
     for s in shots:
-        events.setdefault(ev_id(s), []).append(s)
+        events.setdefault(evs[s["id"]], []).append(s)
     with open(d / "events.jsonl", "w", encoding="utf-8") as f:
         for ev, ss in sorted(events.items(), key=lambda kv: kv[1][0]["date"], reverse=True):
             ppl = sorted({p for x in ss for p in x["people"].split(",") if p})
             f.write(json.dumps({
-                "ev": ev, "date": ss[0]["date"], "event": _most_common([x["event"] for x in ss])[:80],
+                "ev": ev, "date": ss[0]["date"], "event": _most_common([x["event"] for x in ss if len(x["event"] or "") <= 80] or [x["event"] for x in ss])[:80],
                 "place": _most_common([x["place"] for x in ss]), "context": _most_common([x["context"] for x in ss]),
                 "people": ppl, "clips": len(ss), "video": sum(x["kind"] != "photo" for x in ss),
                 "src": ss[0]["post_url"]}, ensure_ascii=False, separators=(",", ":")) + "\n")

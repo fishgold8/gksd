@@ -1,28 +1,28 @@
 {
  "putin": {
-  "total": 735,
-  "video": 399,
-  "photo": 336,
+  "total": 402,
+  "video": 85,
+  "photo": 317,
   "scenes": {
-   "talk": 142,
-   "military": 31,
-   "meeting": 175,
-   "solo": 22,
-   "walk": 31,
-   "handshake": 34,
-   "ceremony": 37,
-   "other": 24,
-   "speech": 158,
-   "crowd": 11,
-   "press": 70
+   "talk": 101,
+   "military": 24,
+   "meeting": 104,
+   "solo": 21,
+   "handshake": 32,
+   "walk": 23,
+   "ceremony": 27,
+   "other": 19,
+   "speech": 32,
+   "crowd": 8,
+   "press": 11
   }
  },
  "tolam": {
-  "total": 14,
+  "total": 12,
   "video": 0,
-  "photo": 14,
+  "photo": 12,
   "scenes": {
-   "ceremony": 6,
+   "ceremony": 4,
    "handshake": 1,
    "talk": 1,
    "meeting": 3,
@@ -40,16 +40,6 @@
    "walk": 2
   }
  },
- "japarov": {
-  "total": 7,
-  "video": 4,
-  "photo": 3,
-  "scenes": {
-   "handshake": 2,
-   "ceremony": 1,
-   "meeting": 4
-  }
- },
  "pezeshkian": {
   "total": 4,
   "video": 1,
@@ -57,31 +47,6 @@
   "scenes": {
    "handshake": 2,
    "talk": 2
-  }
- },
- "ramaphosa": {
-  "total": 4,
-  "video": 4,
-  "photo": 0,
-  "scenes": {
-   "handshake": 1,
-   "meeting": 3
-  }
- },
- "kushner": {
-  "total": 4,
-  "video": 4,
-  "photo": 0,
-  "scenes": {
-   "meeting": 4
-  }
- },
- "witkoff": {
-  "total": 4,
-  "video": 4,
-  "photo": 0,
-  "scenes": {
-   "meeting": 4
   }
  },
  "kozhemyako": {
@@ -102,14 +67,6 @@
    "other": 1,
    "handshake": 1,
    "talk": 1
-  }
- },
- "uchral": {
-  "total": 4,
-  "video": 4,
-  "photo": 0,
-  "scenes": {
-   "meeting": 4
   }
  },
  "tokayev": {
@@ -138,12 +95,14 @@
    "talk": 3
   }
  },
- "anwar": {
+ "japarov": {
   "total": 3,
-  "video": 3,
-  "photo": 0,
+  "video": 1,
+  "photo": 2,
   "scenes": {
-   "meeting": 3
+   "ceremony": 1,
+   "handshake": 1,
+   "meeting": 1
   }
  },
  "lubkov": {
@@ -256,14 +215,6 @@
   "scenes": {
    "handshake": 1,
    "talk": 1
-  }
- },
- "ngo": {
-  "total": 2,
-  "video": 0,
-  "photo": 2,
-  "scenes": {
-   "ceremony": 2
   }
  },
  "shchukin": {
@@ -529,6 +480,22 @@
    "talk": 1
   }
  },
+ "ramaphosa": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "meeting": 1
+  }
+ },
+ "anwar": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "meeting": 1
+  }
+ },
  "kikot": {
   "total": 1,
   "video": 0,
@@ -537,12 +504,44 @@
    "talk": 1
   }
  },
+ "ngo": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "ceremony": 1
+  }
+ },
  "korolev": {
   "total": 1,
   "video": 0,
   "photo": 1,
   "scenes": {
    "talk": 1
+  }
+ },
+ "kushner": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "meeting": 1
+  }
+ },
+ "witkoff": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "meeting": 1
+  }
+ },
+ "uchral": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "meeting": 1
   }
  },
  "ding": {
@@ -607,22 +606,6 @@
   "photo": 1,
   "scenes": {
    "talk": 1
-  }
- },
- "limarenko": {
-  "total": 1,
-  "video": 0,
-  "photo": 1,
-  "scenes": {
-   "talk": 1
-  }
- },
- "liina": {
-  "total": 1,
-  "video": 0,
-  "photo": 1,
-  "scenes": {
-   "military": 1
   }
  },
  "munkozhargalov": {
