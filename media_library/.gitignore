@@ -1,5 +1,7 @@
-data/
+data/*
+!data/library/
+!data/index.jsonl
+!data/people_summary.json
 __pycache__/
 *.session
-scrape.log
 *.log

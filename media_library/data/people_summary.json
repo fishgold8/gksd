@@ -1,0 +1,654 @@
+{
+ "putin": {
+  "total": 402,
+  "video": 72,
+  "photo": 330,
+  "scenes": {
+   "talk": 81,
+   "military": 26,
+   "meeting": 98,
+   "walk": 27,
+   "handshake": 39,
+   "solo": 54,
+   "other": 39,
+   "speech": 27,
+   "press": 6,
+   "crowd": 5
+  }
+ },
+ "tolam": {
+  "total": 14,
+  "video": 0,
+  "photo": 14,
+  "scenes": {
+   "other": 4,
+   "handshake": 2,
+   "walk": 1,
+   "solo": 2,
+   "meeting": 2,
+   "speech": 1,
+   "press": 2
+  }
+ },
+ "modi": {
+  "total": 7,
+  "video": 3,
+  "photo": 4,
+  "scenes": {
+   "handshake": 1,
+   "talk": 2,
+   "other": 1,
+   "walk": 2,
+   "solo": 1
+  }
+ },
+ "pezeshkian": {
+  "total": 4,
+  "video": 1,
+  "photo": 3,
+  "scenes": {
+   "handshake": 2,
+   "solo": 1,
+   "talk": 1
+  }
+ },
+ "pashinyan": {
+  "total": 4,
+  "video": 1,
+  "photo": 3,
+  "scenes": {
+   "handshake": 1,
+   "meeting": 1,
+   "solo": 1,
+   "talk": 1
+  }
+ },
+ "tokayev": {
+  "total": 4,
+  "video": 2,
+  "photo": 2,
+  "scenes": {
+   "talk": 2,
+   "handshake": 1,
+   "meeting": 1
+  }
+ },
+ "nikitin": {
+  "total": 3,
+  "video": 0,
+  "photo": 3,
+  "scenes": {
+   "talk": 2,
+   "solo": 1
+  }
+ },
+ "pamfilova": {
+  "total": 3,
+  "video": 0,
+  "photo": 3,
+  "scenes": {
+   "talk": 3
+  }
+ },
+ "ramaphosa": {
+  "total": 3,
+  "video": 3,
+  "photo": 0,
+  "scenes": {
+   "handshake": 1,
+   "solo": 1,
+   "meeting": 1
+  }
+ },
+ "anwar": {
+  "total": 3,
+  "video": 3,
+  "photo": 0,
+  "scenes": {
+   "meeting": 2,
+   "solo": 1
+  }
+ },
+ "kozhemyako": {
+  "total": 3,
+  "video": 0,
+  "photo": 3,
+  "scenes": {
+   "talk": 2,
+   "solo": 1
+  }
+ },
+ "japarov": {
+  "total": 3,
+  "video": 0,
+  "photo": 3,
+  "scenes": {
+   "handshake": 1,
+   "meeting": 1,
+   "solo": 1
+  }
+ },
+ "hlaing": {
+  "total": 3,
+  "video": 3,
+  "photo": 0,
+  "scenes": {
+   "walk": 2,
+   "handshake": 1
+  }
+ },
+ "kostyuk": {
+  "total": 3,
+  "video": 0,
+  "photo": 3,
+  "scenes": {
+   "handshake": 1,
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "potanin": {
+  "total": 3,
+  "video": 0,
+  "photo": 3,
+  "scenes": {
+   "talk": 1,
+   "solo": 1,
+   "handshake": 1
+  }
+ },
+ "katyrin": {
+  "total": 3,
+  "video": 0,
+  "photo": 3,
+  "scenes": {
+   "talk": 2,
+   "solo": 1
+  }
+ },
+ "repik": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 2
+  }
+ },
+ "schroder": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "other": 2
+  }
+ },
+ "likhachev": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 2
+  }
+ },
+ "gref": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 2
+  }
+ },
+ "popova": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 2
+  }
+ },
+ "dronov": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 2
+  }
+ },
+ "sisi": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "solo": 1,
+   "talk": 1
+  }
+ },
+ "rousseff": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "handshake": 1,
+   "talk": 1
+  }
+ },
+ "shchukin": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "prabowo": {
+  "total": 2,
+  "video": 1,
+  "photo": 1,
+  "scenes": {
+   "handshake": 1,
+   "solo": 1
+  }
+ },
+ "aliyev": {
+  "total": 2,
+  "video": 2,
+  "photo": 0,
+  "scenes": {
+   "walk": 2
+  }
+ },
+ "erdogan": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "khurelsukh": {
+  "total": 2,
+  "video": 1,
+  "photo": 1,
+  "scenes": {
+   "handshake": 1,
+   "solo": 1
+  }
+ },
+ "xi": {
+  "total": 2,
+  "video": 2,
+  "photo": 0,
+  "scenes": {
+   "handshake": 1,
+   "meeting": 1
+  }
+ },
+ "skvortsova": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "alikhanov": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "travnikov": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "handshake": 1,
+   "talk": 1
+  }
+ },
+ "trutnev": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "handshake": 1,
+   "talk": 1
+  }
+ },
+ "mashkov": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 2
+  }
+ },
+ "marinychev": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "handshake": 1,
+   "solo": 1
+  }
+ },
+ "belozyorov": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "vorobyov": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "matviyenko": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "balitsky": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "nikolayev": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "nikishina": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "milyayev": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "kostin": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "khinshtein": {
+  "total": 2,
+  "video": 0,
+  "photo": 2,
+  "scenes": {
+   "talk": 1,
+   "solo": 1
+  }
+ },
+ "mishustin": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "berdymukhamedov": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "belousov": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "military": 1
+  }
+ },
+ "teksler": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "dodik": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "meeting": 1
+  }
+ },
+ "pikalev": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "demeshin": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "nahyan": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "kikot": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "korolev": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "ding": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "meeting": 1
+  }
+ },
+ "rahmon": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "handshake": 1
+  }
+ },
+ "mirziyoyev": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "handshake": 1
+  }
+ },
+ "lukashenko": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "handshake": 1
+  }
+ },
+ "vladimirov": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "jaishankar": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "handshake": 1
+  }
+ },
+ "gekht": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "kazekin": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "handshake": 1
+  }
+ },
+ "tsydenov": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "shuvayev": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "kotyukov": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "abramova": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "volodin": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "handshake": 1
+  }
+ },
+ "khotsenko": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "choe": {
+  "total": 1,
+  "video": 1,
+  "photo": 0,
+  "scenes": {
+   "handshake": 1
+  }
+ },
+ "khusnullin": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "kambolov": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "besprozvannykh": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ },
+ "lantratova": {
+  "total": 1,
+  "video": 0,
+  "photo": 1,
+  "scenes": {
+   "talk": 1
+  }
+ }
+}
