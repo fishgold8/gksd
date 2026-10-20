@@ -2,7 +2,7 @@
   "channels": ["news_kremlin_eng"],
   "data_dir": "data",
   "max_posts": 0,
-  "since_date": "",
+  "since_date": "2026-06-20",
   "focus_people": ["putin"],
   "min_shot_sec": 1.5,
   "max_shot_sec": 40,
