@@ -11,5 +11,6 @@
   "vision_model": "claude-opus-5-5",
   "vision_effort": "low",
   "vision_only_if_focus_person": true,
-  "clip_crf": 20
+  "clip_crf": 20,
+  "max_similar_per_event": 3
 }

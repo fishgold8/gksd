@@ -59,7 +59,22 @@ def process(cfg, con, log=print):
     focus = cfg["focus_people"]
     rows = con.execute(
         "SELECT s.*, m.raw_path FROM shots s JOIN media m ON m.id=s.media_id "
-        "WHERE m.stage='tagged' AND s.people!=''").fetchall()
+        "WHERE m.stage IN ('tagged', 'exported') AND s.people!=''").fetchall()
+    # из похожих планов одного события (люди + сцена + крупность + действие) берём N самых длинных
+    keep_n = cfg.get("max_similar_per_event", 3)
+    groups = {}
+    for s in rows:
+        key = (ev_id(s), s["people"], s["scene"], s["shot"], (s["action"] or "").lower())
+        groups.setdefault(key, []).append(s)
+    keep = set()
+    for ss in groups.values():
+        ss.sort(key=lambda x: -(x["dur"] or 0))
+        keep.update(x["id"] for x in ss[:keep_n])
+    for s in rows:
+        if s["id"] not in keep and s["lib_path"]:
+            (lib / s["lib_path"]).unlink(missing_ok=True)
+            con.execute("UPDATE shots SET lib_path=NULL WHERE id=?", (s["id"],))
+    rows = [s for s in rows if s["id"] in keep]
     for s in rows:
         rel = lib_name(s, focus)
         dest = lib / rel
